@@ -1,0 +1,57 @@
+{
+  "transactions": [
+    {
+      "id": "t2",
+      "type": "income",
+      "amount": 50000,
+      "category": "Зарплата",
+      "date": "2023-10-25",
+      "description": ""
+    },
+    {
+      "id": "t3",
+      "type": "expense",
+      "amount": 850,
+      "category": "Еда",
+      "date": "2023-10-29",
+      "description": "Продукты в супермаркете"
+    },
+    {
+      "type": "expense",
+      "amount": 250,
+      "category": "Кофе",
+      "date": "2023-10-30",
+      "description": "Латте в кафе",
+      "id": "t1757937731650"
+    },
+    {
+      "type": "expense",
+      "amount": 999,
+      "category": "Тест",
+      "date": "2023-10-30",
+      "id": "t1757944391577"
+    },
+    {
+      "type": "expense",
+      "amount": 999,
+      "category": "Тест",
+      "date": "2023-10-30",
+      "id": "t1757944863190"
+    }
+  ],
+  "categories": {
+    "expense": [
+      "Еда",
+      "Бензин",
+      "Жилье",
+      "Здоровье",
+      "Развлечения"
+    ],
+    "income": [
+      "Зарплата",
+      "Фриланс",
+      "Подарок",
+      "Продажа"
+    ]
+  }
+}

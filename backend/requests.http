@@ -1,0 +1,67 @@
+### ================== ТРАНЗАКЦИИ ==================
+
+### Получить все транзакции
+GET http://localhost:4000/api/transactions
+
+### Получить ОДНУ транзакцию (УСПЕШНЫЙ СЛУЧАЙ)
+GET http://localhost:4000/api/transactions/t2
+
+### Получить ОДНУ транзакцию (НЕУСПЕШНЫЙ СЛУЧАЙ)
+GET http://localhost:4000/api/transactions/non-existent-id
+
+### Добавить транзакцию
+POST http://localhost:4000/api/transactions
+Content-Type: application/json
+
+{
+  "type": "expense",
+  "amount": 999,
+  "category": "Тест",
+  "date": "2023-10-30"
+}
+
+### Редактировать транзакцию (замени t1 на реальный ID)
+PUT http://localhost:4000/api/transactions/t1
+Content-Type: application/json
+
+{
+  "amount": 2000,
+  "description": "Новое описание!"
+}
+
+### Удалить транзакцию (замени t1 на реальный ID)
+DELETE http://localhost:4000/api/transactions/t1
+
+
+### ================== КАТЕГОРИИ ==================
+
+### Получить все категории
+GET http://localhost:4000/api/categories
+
+### Добавить категорию
+POST http://localhost:4000/api/categories
+Content-Type: application/json
+
+{
+  "type": "expense",
+  "name": "Спорт"
+}
+
+### Редактировать (переименовать) категорию
+PUT http://localhost:4000/api/categories
+Content-Type: application/json
+
+{
+  "type": "expense",
+  "oldName": "Спорт",
+  "newName": "Фитнес"
+}
+
+### Удалить категорию
+DELETE http://localhost:4000/api/categories
+Content-Type: application/json
+
+{
+  "type": "expense",
+  "name": "Фитнес"
+}
