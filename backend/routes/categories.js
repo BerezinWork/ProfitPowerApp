@@ -3,7 +3,7 @@ const fs = require('fs').promises;
 const router = express.Router();
 
 // GET /api/categories - Получить все категории
-router.get('/api/categories', async (req, res) => {
+router.get('/', async (req, res) => {
     try {
         const data = await fs.readFile('./data.json', 'utf-8');
         const db = JSON.parse(data);

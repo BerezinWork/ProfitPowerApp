@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { getTransactions, addTransaction, updateTransaction, deleteTransaction } from "../thunks/transactionsThunk.js";
+import { getTransactions, getTransactionById, addTransaction, updateTransaction, deleteTransaction } from "../thunks/transactionsThunk.js";
 
 const transactionsSlice = createSlice({
     name: "transactions",
@@ -8,6 +8,9 @@ const transactionsSlice = createSlice({
         items: [],
         loading: false,
         error: "",
+        currentItem: null,
+        currentItemLoading: false,
+        currentItemError: "",
     },
     reducers: {},
     extraReducers: builder => {
@@ -24,6 +27,26 @@ const transactionsSlice = createSlice({
             .addCase(getTransactions.rejected, (state, action) => {
                 state.error = action.payload;
                 state.loading = false;
+            })
+            // getTransactionById
+            .addCase(getTransactionById.pending, state => {
+                state.currentItemLoading = true;
+                state.currentItemError = "";
+                state.currentItem = null;
+            })
+            .addCase(getTransactionById.fulfilled, (state, action) => {
+                state.currentItem = action.payload;
+                state.currentItemLoading = false;
+
+                const index = state.items.findIndex(item => item.id === action.payload.id);
+                if(index !== -1) {
+                    state.items[index] = action.payload;
+                }
+            })
+            .addCase(getTransactionById.rejected, (state, action) => {
+                state.currentItemError = action.payload;
+                state.currentItemLoading = false;
+                state.currentItem = null;
             })
             // addTransaction
             .addCase(addTransaction.pending, state => {

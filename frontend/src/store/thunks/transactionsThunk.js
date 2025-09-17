@@ -12,10 +12,23 @@ export const getTransactions = createAsyncThunk(
 
           return res.data;
       } catch(err) {
-          console.log(`Failed to get transactions: ${err}`);
+          console.error(`Failed to get transactions: ${err}`);
           return rejectWithValue(err.response?.data?.message || 'Something went wrong');
       }
   }
+);
+
+export const getTransactionById = createAsyncThunk(
+    "transactions/getTransactionById",
+    async(id, { rejectWithValue }) => {
+        try {
+            const res = await axios.get(`${API_URL}/api/transactions/${id}`);
+            return res.data;
+        } catch(err) {
+            console.error(`Failed to get transaction by id: ${err}`);
+            return rejectWithValue(err.response?.data?.message || 'Something went wrong');
+        }
+    }
 );
 
 export const updateTransaction = createAsyncThunk(
