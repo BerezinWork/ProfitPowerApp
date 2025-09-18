@@ -20,10 +20,10 @@ export const getCategories = createAsyncThunk(
 
 export const updateCategory = createAsyncThunk(
     "categories/updateCategory",
-    async({ type, oldName, newName }, { rejectWithValue }) => {
+    async({ id, type, newName }, { rejectWithValue }) => {
         try {
-            const res = await axios.put(`${API_URL}/api/categories`, { type, oldName, newName });
-            return res.data;
+            const res = await axios.put(`${API_URL}/api/categories/${id}`, { type, newName });
+            return {type, data: res.data};
         } catch(err) {
             console.error(`Failed to update category: ${err}`);
             return rejectWithValue(err.response?.data?.message || 'Something went wrong');
@@ -46,10 +46,10 @@ export const addCategory = createAsyncThunk(
 
 export const deleteCategory = createAsyncThunk(
     "categories/deleteCategory",
-    async({ type, name }, { rejectWithValue }) => {
+    async({ id, type }, { rejectWithValue }) => {
         try {
-            const res = await axios.delete(`${API_URL}/api/categories`, {data: {type, name}});
-            return { type, name };
+            const res = await axios.delete(`${API_URL}/api/categories/${id}`, {data: {type}});
+            return { id, type };
         } catch (err) {
             console.error(`Failed to delete category: ${err}`);
             return rejectWithValue(err.response?.data?.message || 'Something went wrong');

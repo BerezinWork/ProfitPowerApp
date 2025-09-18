@@ -34,10 +34,10 @@ const categoriesSlice = createSlice({
                 state.error = "";
             })
             .addCase(updateCategory.fulfilled, (state, action) => {
-                const { type } = action.meta.arg;
+                const { type, data } = action.payload;
 
                 if(type && state.items[type]) {
-                    state.items[type] = action.payload;
+                    state.items[type] = data;
                 } else {
                     console.warn('Could not update category: invalid type received', type);
                 }
@@ -74,10 +74,10 @@ const categoriesSlice = createSlice({
                 state.error = "";
             })
             .addCase(deleteCategory.fulfilled, (state, action) => {
-                const { type, name } = action.payload;
+                const { id, type } = action.payload;
 
-                if(type && name && state.items[type]) {
-                    state.items[type] = state.items[type].filter(category => category !== name);
+                if(type && id && state.items[type]) {
+                    state.items[type] = state.items[type].filter(category => category.id !== id);
                 } else {
                     console.warn('Could not delete category: invalid type received', type);
                 }
